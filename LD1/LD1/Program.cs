@@ -251,10 +251,23 @@ namespace LD1
             }
         }
 
-        private static void task14()
+        private static bool task14()
         {
-            Console.WriteLine("Task14 ");
+            Console.WriteLine("Task14 Vilnius founding date guesser");
 
+            int answer = 1323;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (handleUserInput("Input Your guess: ") == answer)
+                {
+                    Console.WriteLine("You have guessed!");
+                    return true;
+                }
+            }
+
+            Console.WriteLine("You miss, Vilnius founding date is – 1323");
+            return false;
         }
 
         private static bool menu(int choice)
