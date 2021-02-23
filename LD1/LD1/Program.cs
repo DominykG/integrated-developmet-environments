@@ -82,15 +82,15 @@ namespace LD1
             Console.WriteLine("Task5 Check input character");
 
             char input = Console.ReadLine()[0];
-            if ((int)input >= 48 && (int)input <= 57) //ASCII number
+            if (char.IsNumber(input)) //ASCII number
             {
                 Console.WriteLine("Input character is a number");
             }
-            else if ((int)input >= 97 && (int)input <= 122) //ASCII lower case characters
+            else if (char.IsLower(input)) //ASCII lower case characters
             {
                 Console.WriteLine("Input character is a lower case character");
             }
-            else if ((int)input >= 65 && (int)input <= 90) //ASCII upper case characters
+            else if (char.IsUpper(input)) //ASCII upper case characters
             {
                 Console.WriteLine("Input character is a upper case character");
             }
@@ -181,6 +181,25 @@ namespace LD1
             return true;
         }
 
+        private static bool task10()
+        {
+            Console.WriteLine("Task10 Number geusser");
+            Random random = new Random();
+            int secretNumber = random.Next(1, 11), guess;
+            for (int i = 0; i < 5; i++)
+            {
+                guess = handleUserInput("Enter Your guess (between 1 - 10):", 1, 10);
+                if (guess == secretNumber)
+                {
+                    Console.WriteLine("You have guessed!");
+                    return true;
+                }
+            }
+
+            Console.WriteLine("Yoi have lost!");
+            return false;
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -226,6 +245,7 @@ namespace LD1
                     break;
 
                 case 10:
+                    task10();
                     break;
 
                 case 11:
@@ -247,7 +267,7 @@ namespace LD1
         }
 
         //This function ensures that the string user inputs is an integer
-        private static int handleUserInput(string message)
+        private static int handleUserInput(string message, int lowerLimit = int.MinValue, int upperLimit = int.MaxValue)
         {
             int choice;
 
@@ -257,6 +277,11 @@ namespace LD1
                 try
                 {
                     choice = Convert.ToInt32(Console.ReadLine());
+                    if (choice < lowerLimit || choice > upperLimit)
+                    {
+                        Console.WriteLine("The number is out of bounds. Please try again");
+                        continue;
+                    }
                 }
                 catch (Exception e)
                 {
