@@ -125,6 +125,16 @@ namespace LD1
             }
         }
 
+        private static void task7()
+        {
+            Console.WriteLine("Task7 Function `y = -2.4 * x^2 + 5 * x - 3` output");
+            //In range of x from -2 to 2 by step 0.5
+            for (float x = -2.0f; x <= 2.0f; x += 0.5f)
+            {
+                Console.WriteLine($"x = {x}, y = {-2.4 * x * x + 5 * x - 3}");
+            }
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -158,6 +168,7 @@ namespace LD1
                     break;
 
                 case 7:
+                    task7();
                     break;
 
                 case 8:
