@@ -10,6 +10,28 @@ namespace LD1
             do{} while (menu(handleUserInput("Enter a choice ([1-14] to execute a task; 0 to clear console; -1 to exit): ")));
         }
 
+        private static void task1()
+        {
+            //Initial code
+            //
+            //int n;
+            //double f;
+            //Console.WriteLine( ”Enter a positive number N:” );
+            //N = Convert.ToInt32(Console.ReadLine());
+            //for (i = 1; i <= N; i++) f * = i;
+            //Console.WriteLine("{ 0}! = { 1} ", n, f);
+
+            //Fixed code
+            Console.WriteLine("Task1 Calculate the factorial");
+            //Initial value of variable `f` was missing
+            double f = 1;
+            //Variable `n` was wrongly redefined as `N`
+            int n = handleUserInput("Enter a positive number N:");
+            //Variable `i` was not defined
+            for (int i = 1; i <= n; i++) f *= i;
+            Console.WriteLine($"{n} ! = {f} ");
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -19,6 +41,7 @@ namespace LD1
                     break;
 
                 case 1:
+                    task1();
                     break;
 
                 case 2:
