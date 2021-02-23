@@ -100,6 +100,31 @@ namespace LD1
             }
         }
 
+        private static void task6()
+        {
+            //Initial code
+            //
+            //i = 1;
+            //while (i < 10)
+            //{
+            //    j = i * i - 1;
+            //    k = 2 * j - 1;
+            //    Console.WriteLine(" i = { 0}; j = { 1}; k = { 2}", i, j, k);
+            //}
+
+            //Fixed code
+            Console.WriteLine("Task6 Fix the loop");
+            int i = 1, j, k; //variable `i` was not defined
+
+            while (i < 10)
+            {
+                j = i * i - 1; //variable `j` was not defined
+                k = 2 * j - 1; //variable `k` was not defined
+                Console.WriteLine($" i = {i}; j = {j}; k = {k}");
+                i += 1; //Stop condition was missing
+            }
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -129,6 +154,7 @@ namespace LD1
                     break;
 
                 case 6:
+                    task6();
                     break;
 
                 case 7:
