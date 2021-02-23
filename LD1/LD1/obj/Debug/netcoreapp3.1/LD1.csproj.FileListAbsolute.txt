@@ -1,0 +1,13 @@
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\obj\Debug\netcoreapp3.1\LD1.csprojAssemblyReference.cache
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\obj\Debug\netcoreapp3.1\LD1.AssemblyInfoInputs.cache
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\obj\Debug\netcoreapp3.1\LD1.AssemblyInfo.cs
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\obj\Debug\netcoreapp3.1\LD1.csproj.CoreCompileInputs.cache
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\bin\Debug\netcoreapp3.1\LD1.exe
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\bin\Debug\netcoreapp3.1\LD1.deps.json
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\bin\Debug\netcoreapp3.1\LD1.runtimeconfig.json
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\bin\Debug\netcoreapp3.1\LD1.runtimeconfig.dev.json
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\bin\Debug\netcoreapp3.1\LD1.dll
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\bin\Debug\netcoreapp3.1\LD1.pdb
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\obj\Debug\netcoreapp3.1\LD1.dll
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\obj\Debug\netcoreapp3.1\LD1.pdb
+D:\University\C_SHARP\integrated_developmet_environments\LD1\LD1\obj\Debug\netcoreapp3.1\LD1.genruntimeconfig.cache
