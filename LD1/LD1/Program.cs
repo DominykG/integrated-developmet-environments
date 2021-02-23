@@ -54,6 +54,29 @@ namespace LD1
             }
         }
 
+        private static void task4()
+        {
+            Console.WriteLine("Task4 Calculate area of a shape (rectangular, triangular or trapezoidal) ");
+
+            float area;
+
+            switch (handleUserInput("Area of what shape You want to calculate? (1 rectangular, 2 triangular, 3 trapezoidal)"))
+            {
+                case 1:
+                    area = handleUserInput("Input length `l`:") * handleUserInput("Input width `w`:"); //calculate the area of a rectangular
+                    Console.WriteLine($"Area of an rectangular is: {area}");
+                    break;
+                case 2:
+                    area = handleUserInput("Input base `b`:") * handleUserInput("Input hight  `h`:") / 2; //calculate the area of a triangular
+                    Console.WriteLine($"Area of an triangular is: {area}");
+                    break;
+                case 3:
+                    area = (handleUserInput("Input base `a`:") + handleUserInput("Input base `b`:")) / 2 * handleUserInput("Input height `h`:"); //calculate the area of a trapezoidal
+                    Console.WriteLine($"Area of an trapezoidal is: {area}");
+                    break;
+            }
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -75,6 +98,7 @@ namespace LD1
                     break;
 
                 case 4:
+                    task4();
                     break;
 
                 case 5:
