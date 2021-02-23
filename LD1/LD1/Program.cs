@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace LD1
 {
@@ -45,6 +44,16 @@ namespace LD1
             Console.WriteLine($"The average is: {total / amount}."); //The average of all input numbers is calculated and displayed
         }
 
+        private static void task3()
+        {
+            Console.WriteLine("Task3 Squares of first five positive odd numbers");
+
+            for (int i = 1; i <= 9; i += 2) //Loop will start at 1 (1st positive odd number) ant stop at 9 (5th positive odd number)
+            {
+                Console.WriteLine($"The number is: {i}, squared: {i * i}."); //Display the number as is and squared
+            }
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -62,6 +71,7 @@ namespace LD1
                     break;
 
                 case 3:
+                    task3();
                     break;
 
                 case 4:
