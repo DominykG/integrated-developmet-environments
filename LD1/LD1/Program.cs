@@ -32,6 +32,19 @@ namespace LD1
             Console.WriteLine($"{n} ! = {f} ");
         }
 
+        private static void task2()
+        {
+            Console.WriteLine("Task2 Calculate the average");
+
+            int amount = handleUserInput("Enter the amount of numbers:"); //User decides the amount of numbers
+            double total = 0.0f;
+            for (int i = 0; i < amount; i++) //User inputs a number the `amount` number of times
+            {
+                total += handleUserInput("Enter the number:"); 
+            }
+            Console.WriteLine($"The average is: {total / amount}."); //The average of all input numbers is calculated and displayed
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -45,6 +58,7 @@ namespace LD1
                     break;
 
                 case 2:
+                    task2();
                     break;
 
                 case 3:
@@ -89,6 +103,7 @@ namespace LD1
             return true;
         }
 
+        //This function ensures that the string user inputs is an integer
         private static int handleUserInput(string message)
         {
             int choice;
