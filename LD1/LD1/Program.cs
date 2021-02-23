@@ -200,6 +200,42 @@ namespace LD1
             return false;
         }
 
+        private static void task11()
+        {
+            Console.WriteLine("Task11 ");
+
+        }
+
+        private static void task12()
+        {
+            Console.WriteLine("Task12 Greatest common divisor");
+
+            int num1 = handleUserInput("Input first number:");
+            int num2 = handleUserInput("Input second number:");
+
+            for (int i = Math.Min(num1, num2); i >= 1; i--) //Common divisor can not be larger than the smallest number 
+            {
+                if (num1 % i == 0 && num2 % i == 0)
+                {
+                    Console.WriteLine($"Largert common divisor is {i}"); //Largest common divisor found
+                    break;
+                }
+            }
+
+        }
+
+        private static void task13()
+        {
+            Console.WriteLine("Task13 ");
+
+        }
+
+        private static void task14()
+        {
+            Console.WriteLine("Task14 ");
+
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -249,15 +285,19 @@ namespace LD1
                     break;
 
                 case 11:
+                    task11();
                     break;
 
                 case 12:
+                    task12();
                     break;
 
                 case 13:
+                    task13();
                     break;
 
                 case 14:
+                    task14();
                     break;
 
                 case -1:
@@ -266,8 +306,8 @@ namespace LD1
             return true;
         }
 
-        //This function ensures that the string user inputs is an integer
-        private static int handleUserInput(string message, int lowerLimit = int.MinValue, int upperLimit = int.MaxValue)
+        //This function ensures that the string user inputs is an integer with possibility to set upper and lower bound
+        private static int handleUserInput(string message, int lowerBound = int.MinValue, int upperBound = int.MaxValue)
         {
             int choice;
 
@@ -277,7 +317,7 @@ namespace LD1
                 try
                 {
                     choice = Convert.ToInt32(Console.ReadLine());
-                    if (choice < lowerLimit || choice > upperLimit)
+                    if (choice < lowerBound || choice > upperBound)
                     {
                         Console.WriteLine("The number is out of bounds. Please try again");
                         continue;
