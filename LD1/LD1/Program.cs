@@ -135,6 +135,16 @@ namespace LD1
             }
         }
 
+        private static void task8()
+        {
+            Console.WriteLine("Task8 print ASCII codes of letters `a` to `z`");
+
+            for (int character = 97; character <= 122; character++) //ASCII lower case characters span from 97 to 122 inclusively
+            {
+                Console.WriteLine($"{character} = {(char)character}");
+            }
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -172,6 +182,7 @@ namespace LD1
                     break;
 
                 case 8:
+                    task8();
                     break;
 
                 case 9:
