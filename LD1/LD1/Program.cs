@@ -26,7 +26,7 @@ namespace LD1
             //Initial value of variable `f` was missing
             double f = 1;
             //Variable `n` was wrongly redefined as `N`
-            int n = handleUserInput("Enter a positive number N:");
+            int n = handleUserInput("Enter a positive number N:", 0);
             //Variable `i` was not defined
             for (int i = 1; i <= n; i++) f *= i;
             Console.WriteLine($"{n} ! = {f} ");
@@ -36,7 +36,7 @@ namespace LD1
         {
             Console.WriteLine("Task2 Calculate the average");
 
-            int amount = handleUserInput("Enter the amount of numbers:"); //User decides the amount of numbers
+            int amount = handleUserInput("Enter the amount of numbers:", 0); //User decides the amount of numbers
             double total = 0.0f;
             for (int i = 0; i < amount; i++) //User inputs a number the `amount` number of times
             {
@@ -61,18 +61,18 @@ namespace LD1
 
             float area;
 
-            switch (handleUserInput("Area of what shape You want to calculate? (1 rectangular, 2 triangular, 3 trapezoidal)"))
+            switch (handleUserInput("Area of what shape You want to calculate? (1 rectangular, 2 triangular, 3 trapezoidal)", 1, 3))
             {
                 case 1:
-                    area = handleUserInput("Input length `l`:") * handleUserInput("Input width `w`:"); //calculate the area of a rectangular
+                    area = handleUserInput("Input length `l`:", 0) * handleUserInput("Input width `w`:", 0); //calculate the area of a rectangular
                     Console.WriteLine($"Area of an rectangular is: {area}");
                     break;
                 case 2:
-                    area = handleUserInput("Input base `b`:") * handleUserInput("Input hight `h`:") / 2; //calculate the area of a triangular
+                    area = handleUserInput("Input base `b`:", 0) * handleUserInput("Input hight `h`:", 0) / 2; //calculate the area of a triangular
                     Console.WriteLine($"Area of an triangular is: {area}");
                     break;
                 case 3:
-                    area = (handleUserInput("Input base `a`:") + handleUserInput("Input base `b`:")) / 2 * handleUserInput("Input height `h`:"); //calculate the area of a trapezoidal
+                    area = (handleUserInput("Input base `a`:", 0) + handleUserInput("Input base `b`:", 0)) / 2 * handleUserInput("Input height `h`:", 0); //calculate the area of a trapezoidal
                     Console.WriteLine($"Area of an trapezoidal is: {area}");
                     break;
             }
