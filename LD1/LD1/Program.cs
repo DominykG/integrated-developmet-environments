@@ -67,13 +67,36 @@ namespace LD1
                     Console.WriteLine($"Area of an rectangular is: {area}");
                     break;
                 case 2:
-                    area = handleUserInput("Input base `b`:") * handleUserInput("Input hight  `h`:") / 2; //calculate the area of a triangular
+                    area = handleUserInput("Input base `b`:") * handleUserInput("Input hight `h`:") / 2; //calculate the area of a triangular
                     Console.WriteLine($"Area of an triangular is: {area}");
                     break;
                 case 3:
                     area = (handleUserInput("Input base `a`:") + handleUserInput("Input base `b`:")) / 2 * handleUserInput("Input height `h`:"); //calculate the area of a trapezoidal
                     Console.WriteLine($"Area of an trapezoidal is: {area}");
                     break;
+            }
+        }
+
+        private static void task5()
+        {
+            Console.WriteLine("Task5 Check input character");
+
+            char input = Console.ReadLine()[0];
+            if ((int)input >= 48 && (int)input <= 57) //ASCII number
+            {
+                Console.WriteLine("Input character is a number");
+            }
+            else if ((int)input >= 97 && (int)input <= 122) //ASCII lower case characters
+            {
+                Console.WriteLine("Input character is a lower case character");
+            }
+            else if ((int)input >= 65 && (int)input <= 90) //ASCII upper case characters
+            {
+                Console.WriteLine("Input character is a upper case character");
+            }
+            else // not a number or a character
+            {
+                Console.WriteLine("Input character is not a number or a character");
             }
         }
 
@@ -102,6 +125,7 @@ namespace LD1
                     break;
 
                 case 5:
+                    task5();
                     break;
 
                 case 6:
