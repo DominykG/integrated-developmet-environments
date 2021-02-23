@@ -203,8 +203,12 @@ namespace LD1
 
         private static void task11()
         {
-            Console.WriteLine("Task11 ");
+            Console.WriteLine("Task11 PI accuracy by user input");
 
+            int accuracy = handleUserInput("Input desired accuracy: ", 0);
+
+            Console.WriteLine(Math.PI);
+            Console.WriteLine(Math.Round(Math.PI, accuracy));
         }
 
         private static void task12()
@@ -259,7 +263,7 @@ namespace LD1
 
             for (int i = 0; i < 3; i++)
             {
-                if (handleUserInput("Input Your guess: ") == answer)
+                if (handleUserInput("Input Your guess: ", 0, 2050) == answer)
                 {
                     Console.WriteLine("You have guessed!");
                     return true;
