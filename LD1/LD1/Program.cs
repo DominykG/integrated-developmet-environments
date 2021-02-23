@@ -145,6 +145,42 @@ namespace LD1
             }
         }
 
+        private static bool task9()
+        {
+            Console.WriteLine("Task9 Check if input integer is prime or not");
+
+            int input = handleUserInput("Input a number:");
+            //Two `2` is a prime number
+            if (input == 2)
+            {
+                Console.WriteLine("Is a prime number");
+                return true;
+            }
+            //One `1` and any number that devides by `2` without a remainder is not a prime number
+            if (input <= 1 || input % 2 == 0)
+            {
+                Console.WriteLine("Is not a prime number");
+                return false;
+            }
+
+            int boundary = (int)Math.Floor(Math.Sqrt(input)); //Checking only divisors up to square root of input (Trial division method)
+            
+            //Starting at 3 because every number before was already checked
+            //Uncrement by two because all whole numbers will be divided by 2 without remainder and that was already checked
+            for (int divisor = 3; divisor <= boundary; divisor += 2) 
+            {
+                if (input % divisor == 0)
+                {
+                    Console.WriteLine("Is not a prime number");
+                    return false;
+                }
+            }
+            //If for loop above didnt determine that the input number is not prime then the number is prime
+            Console.WriteLine("Is a prime number");
+
+            return true;
+        }
+
         private static bool menu(int choice)
         {
             switch (choice)
@@ -186,6 +222,7 @@ namespace LD1
                     break;
 
                 case 9:
+                    task9();
                     break;
 
                 case 10:
