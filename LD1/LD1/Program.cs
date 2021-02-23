@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LD1
 {
@@ -226,8 +227,28 @@ namespace LD1
 
         private static void task13()
         {
-            Console.WriteLine("Task13 ");
+            Console.WriteLine("Task13 Count digits in a string");
 
+            var digits = new Dictionary<char, int>();
+
+            string input = Console.ReadLine();
+
+            foreach (char character in input)
+            {
+                if (char.IsDigit(character)) //If a character in a string is a digit
+                {
+                    if (!digits.ContainsKey(character)) //If digit dictionary does not contain such digit
+                        digits.Add(character, 1); //Create new dictionary entry
+                    else
+                        digits[character] += 1; //Update existing dictionary entry
+                }
+            }
+
+            foreach (var kvp in digits)
+            {
+                // Display all digits ant amount of times they are repeated in the nput steing
+                Console.WriteLine($"digit: {kvp.Key}, amount: {kvp.Value}"); 
+            }
         }
 
         private static void task14()
