@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LD3
 {
@@ -11,6 +10,5 @@ namespace LD3
 
             do { } while (Helper.menu(students));
         }
-
     }
 }

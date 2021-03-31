@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace LD3
 {
@@ -32,22 +32,24 @@ namespace LD3
 
         public Student()
         {
-            Name = "NewName" + random.Next(10000);
-            Surname = "NewSurname" + random.Next(10000);
+            Name = "NewName" + random.Next(10_000);
+            Surname = "NewSurname" + random.Next(10_000);
             Homeworks = new List<int>();
-            for (int i = 0; i < 4; i++) homeworks.Add(random.Next(1, 10));
+            for (int i = 0; i < 5; i++) homeworks.Add(random.Next(1, 10));
             Exam = random.Next(1, 10);
         }
 
         public override string ToString()
         {
-            string ok = $"{Surname} {Name,20}";
+            string ok = $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH}";
 
             Homeworks.ForEach(homework => ok += $"{homework,5}");
 
             ok += $"{Exam,5}";
             return ok;
         }
+
+        public string ToCsvString() => $"{Name},{Surname},{Homeworks[0]},{Homeworks[1]},{Homeworks[2]},{Homeworks[2]},{Homeworks[3]},{Exam}";
 
         public static Student CreateFromConsole()
         {
@@ -86,14 +88,14 @@ namespace LD3
             return table.ToString();
         }
 
-        private string Display() => $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH} " +
-                                    $"{FinalPointsAverage(),FINAL_POINTS_AVERAGE_LENGTH:n2} " +
-                                    $"{FinalPointsMedian(Homeworks.Count),FINAL_POINTS_MEDIAN_LENGTH:n2}";
-
-        private float FinalPointsAverage() => .3f * (float)Homeworks.Average() + .7f * Exam;
+        public float FinalPointsAverage() => .3f * (float)Homeworks.Average() + .7f * Exam;
 
         //need index and index-1 because int/2 returns round up
         private float FinalPointsMedian(int count) => count % 2 == 0 ? (Homeworks[count / 2] + Homeworks[(count / 2) - 1]) / 2.0f : Homeworks[(count / 2) - 1];
+
+        private string Display() => $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH} " +
+                                    $"{FinalPointsAverage(),FINAL_POINTS_AVERAGE_LENGTH:n2} " +
+                                    $"{FinalPointsMedian(Homeworks.Count),FINAL_POINTS_MEDIAN_LENGTH:n2}";
 
         private static Student FromString(string[] values) => new Student()
         {
@@ -101,13 +103,13 @@ namespace LD3
             Surname = values[1],
             Homeworks = new List<int>
             {
-                int.Parse(values[2]),
-                int.Parse(values[3]),
-                int.Parse(values[4]),
-                int.Parse(values[5]),
-                int.Parse(values[6])
+                Helper.IntegerIsInRange(int.Parse(values[2])),
+                Helper.IntegerIsInRange(int.Parse(values[3])),
+                Helper.IntegerIsInRange(int.Parse(values[4])),
+                Helper.IntegerIsInRange(int.Parse(values[5])),
+                Helper.IntegerIsInRange(int.Parse(values[6]))
             },
-            Exam = int.Parse(values[7])
+            Exam = Helper.IntegerIsInRange(int.Parse(values[7]))
         };
     }
 }
