@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Linq;
 
@@ -9,7 +10,8 @@ namespace LD3
     {
         private const int SURNAME_LENGTH = -20;
         private const int NAME_LENGTH = -20;
-        private const int FINAL_POINTS_LENGTH = 17;
+        private const int FINAL_POINTS_AVERAGE_LENGTH = 17;
+        private const int FINAL_POINTS_MEDIAN_LENGTH = 21;
 
         private static Random random;
 
@@ -64,26 +66,48 @@ namespace LD3
             return student;
         }
 
+        public static List<Student> ReadFromFile(string filename) => File.ReadAllLines(filename)
+                                                                         .Skip(1)
+                                                                         .Select(line => line.Split(','))
+                                                                         .Select(values => FromString(values))
+                                                                         .OrderBy(student => student.Name)
+                                                                         .ToList();
+
         public static string ToTable(List<Student> students, bool average) 
         {
             StringBuilder table = new StringBuilder();
 
-            table.Append($"{nameof(Surname),SURNAME_LENGTH} {nameof(Name),NAME_LENGTH} Final points ")
-                .Append(average ? "(Avg.)\n" : "(Med.)\n")
-                .Append('-', table.Length)
-                .AppendLine();
+            table.Append($"{nameof(Surname),SURNAME_LENGTH} {nameof(Name),NAME_LENGTH} Final points (Avg.)\tFinal points (Med.)\n")
+                 .Append('-', table.Length + 1)
+                 .AppendLine();
 
-            students.ForEach(student => table.Append(student.Display(average)).AppendLine());
+            students.ForEach(student => table.Append(student.Display()).AppendLine());
 
             return table.ToString();
         }
 
-        private string Display(bool average) => average ? $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH} {FinalPointsAverage(),FINAL_POINTS_LENGTH:n2}"
-                                                        : $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH} {FinalPointsMedian(Homeworks.Count),FINAL_POINTS_LENGTH:n2}";
+        private string Display() => $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH} " +
+                                    $"{FinalPointsAverage(),FINAL_POINTS_AVERAGE_LENGTH:n2} " +
+                                    $"{FinalPointsMedian(Homeworks.Count),FINAL_POINTS_MEDIAN_LENGTH:n2}";
 
         private float FinalPointsAverage() => .3f * (float)Homeworks.Average() + .7f * Exam;
 
         //need index and index-1 because int/2 returns round up
-        private float FinalPointsMedian(int count) => count % 2 == 0 ? (Homeworks[count / 2] + Homeworks[(count / 2) - 1]) / 2.0f : Homeworks[count / 2];
+        private float FinalPointsMedian(int count) => count % 2 == 0 ? (Homeworks[count / 2] + Homeworks[(count / 2) - 1]) / 2.0f : Homeworks[(count / 2) - 1];
+
+        private static Student FromString(string[] values) => new Student()
+        {
+            Name = values[0],
+            Surname = values[1],
+            Homeworks = new List<int>
+            {
+                int.Parse(values[2]),
+                int.Parse(values[3]),
+                int.Parse(values[4]),
+                int.Parse(values[5]),
+                int.Parse(values[6])
+            },
+            Exam = int.Parse(values[7])
+        };
     }
 }
