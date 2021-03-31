@@ -1,11 +1,15 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Diagnostics;
 using System.Collections.Generic;
 
 namespace LD3
 {
     class Helper
     {
+        private const string STUDENT_CSV_HEADER = "Name,Surname,H1,H2,H3,H4,H5,Exam";
+
         public static int HandleIntegerInput(string message, int lowerBound = int.MinValue, int upperBound = int.MaxValue)
         {
             int choice;
@@ -68,7 +72,7 @@ namespace LD3
                                 " 2 - Show students as table.\n" +
                                 " 3 - Read students from file.\n" +
                                 " 4 - Add random student.\n" +
-                                " 5 - .\n" +
+                                " 5 - Measure student generation.\n" +
                                 "-1 - Exit.\n");
 
             switch (HandleIntegerInput("Input Your choice: "))
@@ -105,6 +109,10 @@ namespace LD3
                     Console.WriteLine(s);
                     break;
 
+                case 5:
+                    TestStudentGeneration();
+                    break;
+
                 case -1:
                     return false;
 
@@ -119,8 +127,57 @@ namespace LD3
         {
             return Enumerable.Range(min, max).Contains(number) ?
               number :
-              throw new ArgumentOutOfRangeException(nameof(number),
-                                                    $"Integer is out of allowed range ({min}-{max}).");
+              throw new ArgumentOutOfRangeException(nameof(number), $"Integer is out of allowed range ({min}-{max}).");
+        }
+
+        public static void TestStudentGeneration()
+        {
+            Stopwatch watch = new Stopwatch();
+
+            //measure 10_000 students
+            MeasureGeneration(watch, 10_000);
+
+            //measure 100_000 students
+            MeasureGeneration(watch, 100_000);
+
+            //measure 1_000_000 students
+            MeasureGeneration(watch, 1_000_000);
+
+            //measure 10_000_000 students
+            MeasureGeneration(watch, 10_000_000);
+        }
+
+        private static void MeasureGeneration(Stopwatch watch, int amount)
+        {
+            watch.Restart();
+
+            var students = new List<Student>();
+
+            using StreamWriter passedStudents = new StreamWriter($"passed_students_of_{amount}.csv");
+            using StreamWriter failedStudents = new StreamWriter($"failed_students_of_{amount}.csv");
+
+            passedStudents.WriteLine(STUDENT_CSV_HEADER);
+            failedStudents.WriteLine(STUDENT_CSV_HEADER);
+
+            //generate random students
+            for (int i = 0; i < amount; i++)
+                students.Add(new Student());
+
+            //sort students in 2 files
+            students.ForEach(student =>
+            {
+                if ((int)student.FinalPointsAverage() >= 5) 
+                    passedStudents.WriteLine(student.ToCsvString());
+
+                else failedStudents.WriteLine(student.ToCsvString());
+            });
+
+            passedStudents.Close();
+            failedStudents.Close();
+
+            watch.Stop();
+
+            Console.WriteLine($"Time elapsed creating {amount:n0} random student records: {watch.Elapsed}");
         }
     }
 }
