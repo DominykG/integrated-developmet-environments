@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LD3
 {
@@ -63,13 +63,12 @@ namespace LD3
 
         public static bool menu(List<Student> students)
         {
-
             Console.WriteLine("\n 0 - Clear console.\n" +
                                 " 1 - Add new student.\n" +
                                 " 2 - Show students as table.\n" +
                                 " 3 - Read students from file.\n" +
                                 " 4 - Add random student.\n" +
-                                " 5 - Show student marks.\n" +
+                                " 5 - .\n" +
                                 "-1 - Exit.\n");
 
             switch (HandleIntegerInput("Input Your choice: "))
@@ -106,10 +105,6 @@ namespace LD3
                     Console.WriteLine(s);
                     break;
 
-                case 5:
-                    Console.WriteLine(students);
-                    break;
-
                 case -1:
                     return false;
 
@@ -118,6 +113,14 @@ namespace LD3
                     break;
             }
             return true;
+        }
+
+        public static int IntegerIsInRange(int number, int min = 1, int max = 10)
+        {
+            return Enumerable.Range(min, max).Contains(number) ?
+              number :
+              throw new ArgumentOutOfRangeException(nameof(number),
+                                                    $"Integer is out of allowed range ({min}-{max}).");
         }
     }
 }

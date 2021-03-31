@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace LD3
 {
@@ -35,7 +35,7 @@ namespace LD3
             Name = "NewName" + random.Next(10000);
             Surname = "NewSurname" + random.Next(10000);
             Homeworks = new List<int>();
-            for (int i = 0; i < 4; i++) homeworks.Add(random.Next(1, 10));
+            for (int i = 0; i < 5; i++) homeworks.Add(random.Next(1, 10));
             Exam = random.Next(1, 10);
         }
 
@@ -101,13 +101,13 @@ namespace LD3
             Surname = values[1],
             Homeworks = new List<int>
             {
-                int.Parse(values[2]),
-                int.Parse(values[3]),
-                int.Parse(values[4]),
-                int.Parse(values[5]),
-                int.Parse(values[6])
+                Helper.IntegerIsInRange(int.Parse(values[2])),
+                Helper.IntegerIsInRange(int.Parse(values[3])),
+                Helper.IntegerIsInRange(int.Parse(values[4])),
+                Helper.IntegerIsInRange(int.Parse(values[5])),
+                Helper.IntegerIsInRange(int.Parse(values[6]))
             },
-            Exam = int.Parse(values[7])
+            Exam = Helper.IntegerIsInRange(int.Parse(values[7]))
         };
     }
 }
