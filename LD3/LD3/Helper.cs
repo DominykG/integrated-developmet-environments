@@ -65,7 +65,7 @@ namespace LD3
             return homeworks;
         }
 
-        public static bool menu(List<Student> students)
+        public static bool Menu(List<Student> students)
         {
             Console.WriteLine("\n 0 - Clear console.\n" +
                                 " 1 - Add new student.\n" +
@@ -74,6 +74,7 @@ namespace LD3
                                 " 4 - Add random student.\n" +
                                 " 5 - Measure student generation.\n" +
                                 " 6 - Measure generation with different containers.\n" +
+                                " 7 - Measure sorting.\n" +
                                 "-1 - Exit.\n");
 
             switch (HandleIntegerInput("Input Your choice: "))
@@ -117,6 +118,10 @@ namespace LD3
                     TestContainers();
                     break;
 
+                case 7:
+                    TestSorting();
+                    break;
+
                 case -1:
                     return false;
 
@@ -134,6 +139,55 @@ namespace LD3
               throw new ArgumentOutOfRangeException(nameof(number), $"Integer is out of allowed range ({min}-{max}).");
         }
 
+        private static void TestSorting()
+        {
+            Stopwatch watch = new Stopwatch();
+
+            TestSortingStrategyOne(watch, null, 10_000);
+            TestSortingStrategyOne(watch, true, 10_000);
+            TestSortingStrategyOne(watch, false, 10_000);
+            Console.WriteLine();
+
+            TestSortingStrategyOne(watch, null, 100_000);
+            TestSortingStrategyOne(watch, true, 100_000);
+            TestSortingStrategyOne(watch, false, 100_000);
+            Console.WriteLine();
+
+            TestSortingStrategyOne(watch, null, 1_000_000);
+            TestSortingStrategyOne(watch, true, 1_000_000);
+            TestSortingStrategyOne(watch, false, 1_000_000);
+            Console.WriteLine();
+
+            TestSortingStrategyOne(watch, null, 10_000_000);
+            TestSortingStrategyOne(watch, true, 10_000_000);
+            TestSortingStrategyOne(watch, false, 10_000_000);
+            Console.WriteLine();
+        }
+
+        private static void TestSortingStrategyOne(Stopwatch watch, bool? container, int amount)
+        {
+            var filename = @Environment.CurrentDirectory + $"/{amount}_students.csv";
+
+            var students = DecideContainer(filename, container);
+
+            var passedStudents = (IEnumerable<Student>)Activator.CreateInstance(students.GetType());
+            var failedStudents = (IEnumerable<Student>)Activator.CreateInstance(students.GetType());
+
+            watch.Restart();
+
+            foreach (Student student in students)
+            {
+                if (student.FinalPointsAverage() >= 5)
+                    passedStudents.Append(student);
+
+                else failedStudents.Append(student);
+            }
+
+            watch.Stop();
+
+            Console.WriteLine($"Time elapsed using {students.GetType().Name} sorting {amount:n0} students. {watch.Elapsed}");
+        }       
+
         private static void TestStudentGeneration()
         {
             Stopwatch watch = new Stopwatch();
@@ -150,11 +204,6 @@ namespace LD3
         private static void TestContainers()
         {
             Stopwatch watch = new Stopwatch();
-
-            GenerateStudents(10_000);
-            GenerateStudents(100_000);
-            GenerateStudents(1_000_000);
-            GenerateStudents(10_000_000);
 
             TestContainer(watch, null, 10_000);
             TestContainer(watch, true, 10_000);
@@ -177,13 +226,13 @@ namespace LD3
             Console.WriteLine();
         }
 
-        private static void TestContainer(Stopwatch watch, bool? container, int amount = 1_000_000)
+        private static void TestContainer(Stopwatch watch, bool? container, int amount)
         {
             var filename = @Environment.CurrentDirectory + $"/{amount}_students.csv";
 
             watch.Restart();
 
-            var students = ReadFromFile(filename, container);
+            var students = DecideContainer(filename, container);
 
             using StreamWriter passedStudents = new StreamWriter($"passed_students_of_{amount}_using_{students.GetType().Name}.csv");
             using StreamWriter failedStudents = new StreamWriter($"failed_students_of_{amount}_using_{students.GetType().Name}.csv");
@@ -204,7 +253,7 @@ namespace LD3
             Console.WriteLine($"Time elapsed using {students.GetType().Name} for {amount:n0} of students. {watch.Elapsed}");
         }
 
-        private static IEnumerable<Student> ReadFromFile(string filename, bool? container)
+        private static IEnumerable<Student> DecideContainer(string filename, bool? container)
         {
             switch(container)
             {
@@ -217,7 +266,7 @@ namespace LD3
             }
         }
 
-        private static void GenerateStudents(int amount = 1_000_000)
+        public static void GenerateStudents(int amount = 1_000_000)
         {
             using StreamWriter students = new StreamWriter($"{amount}_students.csv");
 
