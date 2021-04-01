@@ -32,21 +32,22 @@ namespace LD3
 
         public Student()
         {
-            Name = "NewName" + random.Next(10_000);
-            Surname = "NewSurname" + random.Next(10_000);
+            Name = "NewName" + random.Next(1_000, 10_000);
+            Surname = "NewSurname" + random.Next(1_000, 10_000);
             Homeworks = new List<int>();
-            for (int i = 0; i < 5; i++) homeworks.Add(random.Next(1, 10));
+            for (int i = 0; i < 5; i++) Homeworks.Add(random.Next(1, 10));
+            Homeworks.Sort();
             Exam = random.Next(1, 10);
         }
 
         public override string ToString()
         {
-            string ok = $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH}";
+            string student = $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH}";
 
-            Homeworks.ForEach(homework => ok += $"{homework,5}");
+            Homeworks.ForEach(homework => student += $"{homework,5}");
 
-            ok += $"{Exam,5}";
-            return ok;
+            student += $"{Exam,5}";
+            return student;
         }
 
         public string ToCsvString() => $"{Name},{Surname},{Homeworks[0]},{Homeworks[1]},{Homeworks[2]},{Homeworks[2]},{Homeworks[3]},{Exam}";
@@ -68,22 +69,23 @@ namespace LD3
             return student;
         }
 
-        public static List<Student> ReadFromFile(string filename) => File.ReadAllLines(filename)
+        public static Student[] ReadFromFile(string filename) => File.ReadAllLines(filename)
                                                                          .Skip(1)
                                                                          .Select(line => line.Split(','))
                                                                          .Select(values => FromString(values))
-                                                                         .OrderBy(student => student.Name)
-                                                                         .ToList();
+                                                                         .ToArray();
 
         public static string ToTable(List<Student> students, bool average) 
         {
             StringBuilder table = new StringBuilder();
 
+            var s = students.OrderBy(student => student.Surname).ToList();
+
             table.Append($"{nameof(Surname),SURNAME_LENGTH} {nameof(Name),NAME_LENGTH} Final points (Avg.)\tFinal points (Med.)\n")
                  .Append('-', table.Length + 1)
                  .AppendLine();
 
-            students.ForEach(student => table.Append(student.Display()).AppendLine());
+            s.ForEach(student => table.Append(student.Display()).AppendLine());
 
             return table.ToString();
         }
@@ -91,7 +93,7 @@ namespace LD3
         public float FinalPointsAverage() => .3f * (float)Homeworks.Average() + .7f * Exam;
 
         //need index and index-1 because int/2 returns round up
-        private float FinalPointsMedian(int count) => count % 2 == 0 ? (Homeworks[count / 2] + Homeworks[(count / 2) - 1]) / 2.0f : Homeworks[(count / 2) - 1];
+        private float FinalPointsMedian(int count) => count % 2 == 0 ? (Homeworks[count / 2] + Homeworks[(count / 2) - 1]) / 2.0f : Homeworks[count / 2];
 
         private string Display() => $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH} " +
                                     $"{FinalPointsAverage(),FINAL_POINTS_AVERAGE_LENGTH:n2} " +
