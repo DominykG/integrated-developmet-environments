@@ -93,11 +93,13 @@ namespace LD3
         public float FinalPointsAverage() => .3f * (float)Homeworks.Average() + .7f * Exam;
 
         //need index and index-1 because int/2 returns round up
-        private float FinalPointsMedian(int count) => count % 2 == 0 ? (Homeworks[count / 2] + Homeworks[(count / 2) - 1]) / 2.0f : Homeworks[count / 2];
+        private float FinalPointsMedian() => .3f * HomeworkMedian(Homeworks.Count) + .7f * Exam;
+
+        private float HomeworkMedian(int count) => count % 2 == 0 ? (Homeworks[count / 2] + Homeworks[(count / 2) - 1]) / 2.0f : Homeworks[count / 2];
 
         private string Display() => $"{Surname,SURNAME_LENGTH} {Name,NAME_LENGTH} " +
                                     $"{FinalPointsAverage(),FINAL_POINTS_AVERAGE_LENGTH:n2} " +
-                                    $"{FinalPointsMedian(Homeworks.Count),FINAL_POINTS_MEDIAN_LENGTH:n2}";
+                                    $"{FinalPointsMedian(),FINAL_POINTS_MEDIAN_LENGTH:n2}";
 
         private static Student FromString(string[] values) => new Student()
         {

@@ -8,7 +8,7 @@ namespace LD3
         {
             var students = new List<Student>();
 
-            do { } while (Helper.menu(students));
+            do { } while (Helper.Menu(students));
         }
     }
 }
