@@ -33,7 +33,7 @@ Implemented fuctionality:
 
 <b>Performance testing result:</b>
 
-![plot](Assets/test_generation.PNG?raw=true 'Performance testing results')
+![plot](Assets/test_generation.png?raw=true 'Performance testing results')
 
 
 ## <b>Release v0.5</b>
@@ -42,7 +42,7 @@ Using the same dataset Student sorting was performed using `List<>`, `LinkedList
 
 <b>Performance testing result:</b>
 
-![plot](Assets/sorting_and_saving_to_files.PNG?raw=true 'Performance testing results')
+![plot](Assets/sorting_and_saving_to_files.png?raw=true 'Performance testing results')
 
 ### <b>Analysis:</b>
 
@@ -64,7 +64,7 @@ While strategy 1 is focused on speed, strategy 2 is more memory efficient.
 
 <b>Performance testing result:</b>
 
-![plot](Assets/sorting_diff_strategies.PNG?raw=true 'Performance testing results')
+![plot](Assets/sorting_diff_strategies.png?raw=true 'Performance testing results')
 
 ### <b>Analysis:</b>
 
