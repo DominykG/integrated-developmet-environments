@@ -58,7 +58,7 @@ Sorting was performed using 2 strategies:
 
 * <b>Strategy 1.</b> Copy failed and passed students into two new containers of the same type as starting student collection.
 
-* <b>Strategy 1.</b> Failed student has to be added inot new failed students collection while being removed from starting student collection, this way after analyzing all the students only passed students will remain in the starting collection.
+* <b>Strategy 2.</b> Failed student has to be added into new failed students collection while being removed from starting student collection, this way after analyzing all the students only passed students will remain in the starting collection.
 
 While strategy 1 is focused on speed, strategy 2 is more memory efficient.
 
